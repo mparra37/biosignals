@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.wear.widget.BoxInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_grey"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context="mx.cicese.biosignals.MainActivity"
+    tools:deviceIds="wear">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/inner_frame_layout_padding"
+        android:orientation="vertical"
+        app:boxedEdges="all">
+
+        <TextView
+            android:id="@+id/tv_heartrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ritmo"
+            android:textAppearance="@android:style/TextAppearance"
+            android:visibility="visible"
+            android:textSize="30dp"
+            />
+
+        <Button
+            android:id="@+id/botonComenzar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="iniciar"
+            android:text="Iniciar"
+            />
+
+        <Button
+            android:id="@+id/botonDetener"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="detener"
+            android:text="Detener"
+           />
+
+    </LinearLayout>
+</android.support.wear.widget.BoxInsetLayout>
+

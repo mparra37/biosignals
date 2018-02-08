@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="mx.cicese.biosignals.MainActivity">
+
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onStartWearableActivityClick"
+        android:text="Abrir aplicación en reloj"
+        android:layout_gravity="center_vertical|center_horizontal"/>
+
+    <Button
+        android:id="@+id/botonComenzar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comenzar"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:onClick="comenzar"/>
+
+    <Button
+        android:id="@+id/botonDetener"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detener"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:onClick="detener"/>
+
+    <TextView
+        android:id="@+id/tv_heartRate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:gravity="center"
+        android:text="HR"
+        android:textSize="40dp" />
+</LinearLayout>
