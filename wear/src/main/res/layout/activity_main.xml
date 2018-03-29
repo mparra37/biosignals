@@ -22,7 +22,7 @@
             android:id="@+id/tv_heartrate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ritmo"
+            android:text="HR"
             android:textAppearance="@android:style/TextAppearance"
             android:visibility="visible"
             android:textSize="30dp"

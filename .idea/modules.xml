@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Biosignals.iml" filepath="$PROJECT_DIR$/Biosignals.iml" />
+      <module fileurl="file://C:\Users\Mario\Documents\apps\biosignals\Biosignals.iml" filepath="C:\Users\Mario\Documents\apps\biosignals\Biosignals.iml" />
+      <module fileurl="file://$PROJECT_DIR$/biosignals.iml" filepath="$PROJECT_DIR$/biosignals.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobile/mobile.iml" filepath="$PROJECT_DIR$/mobile/mobile.iml" />
+      <module fileurl="file://C:\Users\Mario\Documents\apps\biosignals\mobile\mobile.iml" filepath="C:\Users\Mario\Documents\apps\biosignals\mobile\mobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/wear/wear.iml" filepath="$PROJECT_DIR$/wear/wear.iml" />
+      <module fileurl="file://C:\Users\Mario\Documents\apps\biosignals\wear\wear.iml" filepath="C:\Users\Mario\Documents\apps\biosignals\wear\wear.iml" />
     </modules>
   </component>
 </project>

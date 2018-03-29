@@ -8,17 +8,19 @@ public class HeartRate {
     int id;
     int ritmo;
     long time;
+    double IBI;
     int accuracy;
 
     public HeartRate(){
 
     }
 
-    public HeartRate(int id, long time, int ritmo, int accuracy) {
+    public HeartRate(int id, long time, int ritmo, int accuracy, double IBI) {
         this.id = id;
         this.time = time;
         this.ritmo = ritmo;
         this.accuracy = accuracy;
+        this.IBI = IBI;
     }
 
     public long[] getLongArray(){
@@ -33,7 +35,7 @@ public class HeartRate {
 
     @Override
     public String toString() {
-        return id + ", " + ritmo + ", " + time + ", " + accuracy;
+        return id + ", " + ritmo + ", " + time + ", " + accuracy + ", " + IBI;
     }
 }
 

@@ -126,6 +126,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
             hr.time = time;
             hr.ritmo = ritmo;
             hr.accuracy = accuracy;
+            hr.IBI = (double) ritmo/60;
             listaDatos.add(hr);
             sendHRtoPhone(hr.getLongArray());
         }
@@ -145,7 +146,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
 
     public void iniciar(View v){
-        Toast.makeText(this, "click iniciar", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "iniciando sesión", Toast.LENGTH_SHORT).show();
         mHeartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
         mSensorManager.registerListener(this, mHeartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
         Long tiempoInicio = System.currentTimeMillis();
@@ -153,18 +154,19 @@ public class MainActivity extends WearableActivity implements SensorEventListene
     }
 
     public void detener(View v){
-        Toast.makeText(this, "click detener", Toast.LENGTH_SHORT).show();
-        String FILENAME = "datosAcc.txt";
+        Toast.makeText(this, "sesión detenida", Toast.LENGTH_SHORT).show();
 
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        String FILENAME = timestamp + ".txt";
         guardarArchivo(FILENAME);
-
+        mTextViewHeart.setText("HR");
         mSensorManager.unregisterListener(this);
     }
 
 
     public void guardarArchivo(String nombre){
         File root = Environment.getExternalStorageDirectory();
-        File dir = new File(root.getAbsolutePath() + "/Sensapp");
+        File dir = new File(root.getAbsolutePath() + "/Biosignals");
 
         if (!dir.exists()){
             boolean res = dir.mkdir();
