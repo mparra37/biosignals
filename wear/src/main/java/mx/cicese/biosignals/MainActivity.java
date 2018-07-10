@@ -128,7 +128,9 @@ public class MainActivity extends WearableActivity implements SensorEventListene
             hr.accuracy = accuracy;
             hr.IBI = (double) ritmo/60;
             listaDatos.add(hr);
-            sendHRtoPhone(hr.getLongArray());
+            Client myClient = new Client("192.168.0.10", 9898, hr.toString());
+            myClient.execute();
+            //sendHRtoPhone(hr.getLongArray());
         }
         else
             Log.d(TAG, "Unknown sensor type");
