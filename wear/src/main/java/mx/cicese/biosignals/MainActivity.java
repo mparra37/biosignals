@@ -36,14 +36,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends WearableActivity implements SensorEventListener, DataClient.OnDataChangedListener{
+public class MainActivity extends WearableActivity implements SensorEventListener, DataClient.OnDataChangedListener {
 
     private static final String TAG = "MainActivity";
     SensorManager mSensorManager;
     Sensor mHeartRateSensor;
+    Sensor accelerometer;
     SensorEventListener sensorEventListener;
     List<HeartRate> listaDatos = new ArrayList<>();
+    List<Accelerometer> listaAcc = new ArrayList<>();
     static int counter = 0;
+    static int counterAcc = 0;
     private TextView mTextViewHeart;
     private String usuario = "Mario";
     private Button botonIniciar, botonDetener;
@@ -132,6 +135,26 @@ public class MainActivity extends WearableActivity implements SensorEventListene
             myClient.execute();
             //sendHRtoPhone(hr.getLongArray());
         }
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            double valueX = (double)event.values[0];
+            double valueY = (double)event.values[1];
+            double valueZ = (double)event.values[2];
+            int accuracy = event.accuracy;
+            Long time = System.currentTimeMillis() + ((event.timestamp- SystemClock.elapsedRealtimeNanos())/1000000L);
+            Accelerometer acc = new Accelerometer();
+            acc.id = counterAcc;
+            counterAcc++;
+            acc.time = time;
+            acc.valueX = valueX;
+            acc.valueY = valueY;
+            acc.valueZ = valueZ;
+            acc.accuracy = accuracy;
+
+            listaAcc.add(acc);
+           // Client myClient = new Client("192.168.0.10", 9898, hr.toString());
+           // myClient.execute();
+            //sendHRtoPhone(hr.getLongArray());
+        }
         else
             Log.d(TAG, "Unknown sensor type");
     }
@@ -150,7 +173,9 @@ public class MainActivity extends WearableActivity implements SensorEventListene
     public void iniciar(View v){
         Toast.makeText(this, "iniciando sesión", Toast.LENGTH_SHORT).show();
         mHeartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
+        accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensorManager.registerListener(this, mHeartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         Long tiempoInicio = System.currentTimeMillis();
         Long tiempoClockNano = SystemClock.elapsedRealtimeNanos();
     }
@@ -159,10 +184,14 @@ public class MainActivity extends WearableActivity implements SensorEventListene
         Toast.makeText(this, "sesión detenida", Toast.LENGTH_SHORT).show();
 
         String timestamp = String.valueOf(System.currentTimeMillis());
-        String FILENAME = timestamp + ".txt";
+        String FILENAME = "HR_" + timestamp + ".txt";
         guardarArchivo(FILENAME);
+
+        String FILENAME2 = "ACC_" + timestamp + ".txt";
+        guardarArchivo2(FILENAME2);
         mTextViewHeart.setText("HR");
         mSensorManager.unregisterListener(this);
+
     }
 
 
@@ -196,6 +225,39 @@ public class MainActivity extends WearableActivity implements SensorEventListene
             e.printStackTrace();
         }
         Toast.makeText(this, "Archivo guardado", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void guardarArchivo2(String nombre){
+        File root = Environment.getExternalStorageDirectory();
+        File dir = new File(root.getAbsolutePath() + "/Biosignals");
+
+        if (!dir.exists()){
+            boolean res = dir.mkdir();
+            Log.d("res", res+"");
+        }
+
+        File file = new File(dir.getAbsoluteFile() + File.separator + nombre);
+
+        try {
+            file.createNewFile();
+            FileOutputStream fOut = new FileOutputStream(file);
+            OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
+
+            for (Accelerometer acc : listaAcc) {
+                myOutWriter.append(acc.toString() + "\n");
+            }
+
+            myOutWriter.close();
+
+            fOut.flush();
+            fOut.close();
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //Toast.makeText(this, "Archivo guardado", Toast.LENGTH_SHORT).show();
 
     }
 
